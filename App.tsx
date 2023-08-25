@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Image,
+} from "react-native";
 import axios from "axios";
 
 interface IAddress {
@@ -16,10 +23,7 @@ interface IAddress {
   siafi: string;
 }
 
-export const REACT_APP_GOOGLE_API_KEY = "CHAVE-API";
-
 export default function App() {
-  const [text, onChangeText] = useState("Useless Text");
   const [CEP, setCEP] = useState("");
   const [address, setAddress] = useState<IAddress>();
   useEffect(() => {
@@ -41,6 +45,8 @@ export default function App() {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
+      <Image source={require("./assets/city.jpg")} style={styles.image} />
+
       <View style={styles.secondaryContainer}>
         <View style={styles.inputContainer}>
           <Text style={styles.inputText}>Digite o CEP</Text>
@@ -81,14 +87,17 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#13141a",
+    backgroundColor: "#21262A",
     justifyContent: "flex-end",
   },
-
   secondaryContainer: {
-    flex: 0.4,
-    backgroundColor: "#2A2E3B",
+    flex: 0.35,
+    backgroundColor: "#21262A",
     padding: 20,
+  },
+
+  image: {
+    flex: 0.65,
   },
 
   inputContainer: {
