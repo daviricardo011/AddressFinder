@@ -1,17 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { StatusBar } from "react-native";
 import axios from "axios";
-import {
-  Container,
-  SecondaryContainer,
-  InputContainer,
-  InputLabel,
-  Input,
-  ResponseTextContainer,
-  ResponseText,
-  TitleText,
-  ImageBackground,
-} from "./components";
+import { Container, SecondaryContainer, ImageBackground } from "./styles";
+import { AddressLine } from "./components/AddressLine";
+import { InputText } from "./components/Input";
 
 interface IAddress {
   cep: string;
@@ -50,37 +42,22 @@ export default function App() {
       <StatusBar barStyle="light-content" />
       <ImageBackground source={require("./assets/city.jpg")}>
         <SecondaryContainer>
-          <InputContainer>
-            <InputLabel>Digite o CEP</InputLabel>
-            <Input
-              onChangeText={setCEP}
-              value={CEP}
-              placeholder="Digite o CEP aqui"
-              placeholderTextColor="#a0a0a0"
-              keyboardType="numeric"
-            />
-          </InputContainer>
-
-          <ResponseTextContainer>
-            <ResponseText>{address?.logradouro || "-"}</ResponseText>
-            <TitleText>Logradouro</TitleText>
-          </ResponseTextContainer>
-          <ResponseTextContainer>
-            <ResponseText>{address?.bairro || "-"}</ResponseText>
-            <TitleText>Bairro</TitleText>
-          </ResponseTextContainer>
-          <ResponseTextContainer>
-            <ResponseText>{address?.complemento || "-"}</ResponseText>
-            <TitleText>Complemento</TitleText>
-          </ResponseTextContainer>
-          <ResponseTextContainer>
-            <ResponseText>{address?.localidade || "-"}</ResponseText>
-            <TitleText>Cidade</TitleText>
-          </ResponseTextContainer>
-          <ResponseTextContainer>
-            <ResponseText>{address?.uf || "-"}</ResponseText>
-            <TitleText>Unidade Federativa</TitleText>
-          </ResponseTextContainer>
+          <InputText
+            label="Digite o CEP"
+            onChangeText={setCEP}
+            value={CEP}
+            placeholder="Digite o CEP aqui"
+            placeholderTextColor="#a0a0a0"
+            keyboardType="numeric"
+          />
+          <AddressLine label={"Logradouro"} text={address?.logradouro || "-"} />
+          <AddressLine label={"Bairro"} text={address?.bairro || "-"} />
+          <AddressLine
+            label={"Complemento"}
+            text={address?.complemento || "-"}
+          />
+          <AddressLine label={"Cidade"} text={address?.localidade || "-"} />
+          <AddressLine label={"Unidade Federativa"} text={address?.uf || "-"} />
         </SecondaryContainer>
       </ImageBackground>
     </Container>
